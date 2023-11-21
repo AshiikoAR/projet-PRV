@@ -4,7 +4,7 @@ from .models import Equipe, Joueur
 class EquipeForm(forms.ModelForm):
     class Meta:
         model = Equipe
-        fields = ['nom_equipe']  # Les champs que vous souhaitez afficher dans le formulaire
+        fields = ['nom_equipe']
 
 class JoueurForm(forms.ModelForm):
     equipe = forms.ModelChoiceField(queryset=Equipe.objects.all(), label='Sélectionnez une équipe', empty_label=None)

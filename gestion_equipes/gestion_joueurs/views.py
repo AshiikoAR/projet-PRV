@@ -60,15 +60,17 @@ def supprimer_equipe(request, equipe_id):
 
 
 def shuffle_joueurs(request):
-    equipes = list(Equipe.objects.all()) # Récupère toutes les équipes existantes
-    joueurs = list(Joueur.objects.all()) # Récupère tous les utilisateurs existants
+    equipes = list(Equipe.objects.all())
+    joueurs = list(Joueur.objects.all())
 
-    random.shuffle(joueurs) # Mélange aléatoirement la liste des utilisateurs
+    random.shuffle(joueurs)
 
-    Transfert.objects.all().delete() # Réinitialise les associations utilisateur-équipe existantes
+    # Supprime toutes les associations existantes entre les joueurs et les équipes
+    Transfert.objects.all().delete()
 
-    for i, joueur in enumerate(joueurs):  # Modifier ici pour utiliser la variable 'joueur'
+    # Associe chaque joueur à une équipe de manière aléatoire
+    for i, joueur in enumerate(joueurs):
         equipe = equipes[i % len(equipes)]
-        Transfert.objects.create(joueur=joueur, equipe=equipe)  # Utilisation de la variable 'joueur'
+        Transfert.objects.create(joueur=joueur, equipe=equipe)
 
     return redirect('liste_joueurs_par_equipe')
