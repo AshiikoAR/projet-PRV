@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Modifier les joueurs d'équipe</title>
+        <style>
+            body{
+                text-align: center;
+                font-family: Arial, sans-serif;
+            }
+
+            a{
+                font-size: 13px;
+                display: inline-block;
+                padding: 2px 7px;
+                text-align: center;
+                text-decoration: none;
+                color: black;
+                background-color: #F5F5F5;
+                border-radius: 3px;
+                border: 1px solid #696969;
+                transition: background-color 0.2s, color 0.2s;
+            }
+              
+            a:hover {
+                background-color: #DCDCDC;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Modifier les joueurs d'équipe</h1>
+        <p>Changer <b>{{ joueur.nom_joueur }}</b> d'équipe ?</p>
+        <form method="post">
+            {% csrf_token %}
+            <label for="equipe">Choisir une équipe :</label>
+            <select name="equipe" id="equipe">
+                {% for equipe in equipes %}
+                    <option value="{{ equipe.id }}">{{ equipe.nom_equipe }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Enregistrer">
+        </form>
+        <br>
+        <a href="../../liste_joueurs_par_equipe">Annuler</a>
+    </body>
+</html>

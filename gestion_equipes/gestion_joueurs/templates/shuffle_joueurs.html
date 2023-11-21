@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mélange des joueurs</title>
+    </head>
+    <body>
+        <h1>Mélange des joueurs</h1>
+        <ul>
+        {% for equipe in equipes %}
+            <li>{{ equipe.nom_equipe }}:
+                <ul>
+                {% for joueur in equipe.joueurs.all %}
+                    <li>{{ joueur.nom_joueur }}</li>
+                {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>

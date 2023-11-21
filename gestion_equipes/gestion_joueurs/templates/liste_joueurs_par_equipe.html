@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Liste des joueurs par équipe</title>
+        <style>
+            body{
+                text-align: center;
+                font-family: Arial, sans-serif;
+            }
+
+            table{
+                text-align: center;
+                width: 40%;
+                border-collapse: collapse;
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            th{
+                background-color: #D3D3D3;
+            }
+
+            a{
+                font-size: 13px;
+                display: inline-block;
+                padding: 2px 7px;
+                text-align: center;
+                text-decoration: none;
+                color: black;
+                background-color: #F5F5F5;
+                border-radius: 3px;
+                border: 1px solid #696969;
+                transition: background-color 0.2s, color 0.2s;
+            }
+              
+            a:hover {
+                background-color: #DCDCDC;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Liste des joueurs par équipe</h1>
+        <table border=1>
+            <thead>
+                <tr>
+                    <th>Équipe(s)</th>
+                    <th>Joueur(s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for equipe in equipes %}
+                    <tr>
+                        <td>
+                            <b><u>{{ equipe.nom_equipe }}</u></b>
+                            <br>
+                            <a href="{% url 'supprimer_equipe' equipe.id %}">Supprimer</a>
+                        </td>
+                        <td>
+                            {% if equipe.joueur_set.all %}
+                                {% for joueur in equipe.joueur_set.all %}
+                                    <br>
+                                    {{ joueur.nom_joueur }}
+                                    <br>
+                                    <a href="{% url 'modifier_joueur_equipe' joueur.id %}">Modifier</a>
+                                    - <a href="{% url 'supprimer_joueur' joueur.id %}">Supprimer</a>
+                                    <br><br>
+                                {% endfor %}
+                            {% else %}
+                                <br>Pas de joueurs<br><br>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="../ajout_equipe">Ajouter une équipe</a>
+        - <a href="../ajout_joueur">Ajouter un joueur</a>
+        - <a href="{% url 'shuffle_joueurs' %}">Mélanger les joueurs</a>
+    </body>
+</html>

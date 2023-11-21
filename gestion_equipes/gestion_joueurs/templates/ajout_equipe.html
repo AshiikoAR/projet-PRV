@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ajout d'une équipe</title>
+    <style>
+        body{
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        a{
+            font-size: 13px;
+            display: inline-block;
+            padding: 2px 7px;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            background-color: #F5F5F5;
+            border-radius: 3px;
+            border: 1px solid #696969;
+            transition: background-color 0.2s, color 0.2s;
+        }
+          
+        a:hover {
+            background-color: #DCDCDC;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ajout d'une équipe</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Ajouter</button>
+    </form>
+    <br>
+    <a href="../liste_joueurs_par_equipe">Annuler</a>
+</body>
+</html>
