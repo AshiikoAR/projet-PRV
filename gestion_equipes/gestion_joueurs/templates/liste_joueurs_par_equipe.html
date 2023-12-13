@@ -37,6 +37,9 @@
             a:hover {
                 background-color: #DCDCDC;
             }
+            /*span {
+                display: none;
+            }*/
         </style>
     </head>
     <body>
@@ -54,6 +57,7 @@
                         <td>
                             <b><u>{{ equipe.nom_equipe }}</u></b>
                             <br>
+                            <span>
                             <a href="{% url 'supprimer_equipe' equipe.id %}">Supprimer</a>
                         </td>
                         <td>
@@ -61,9 +65,11 @@
                                 {% for joueur in equipe.joueur_set.all %}
                                     <br>
                                     {{ joueur.nom_joueur }}
-                                    <br>
-                                    <a href="{% url 'modifier_joueur_equipe' joueur.id %}">Modifier</a>
-                                    - <a href="{% url 'supprimer_joueur' joueur.id %}">Supprimer</a>
+                                    <span>
+                                        <br>
+                                        <a href="{% url 'modifier_joueur_equipe' joueur.id %}">Modifier</a>
+                                        - <a href="{% url 'supprimer_joueur' joueur.id %}">Supprimer</a>
+                                    </span>
                                     <br><br>
                                 {% endfor %}
                             {% else %}
@@ -75,8 +81,10 @@
             </tbody>
         </table>
         <br>
-        <a href="../ajout_equipe">Ajouter une équipe</a>
-        - <a href="../ajout_joueur">Ajouter un joueur</a>
-        - <a href="{% url 'shuffle_joueurs' %}">Mélanger les joueurs</a>
+        <span>
+            <a href="../ajout_equipe">Ajouter une équipe</a>
+            - <a href="../ajout_joueur">Ajouter un joueur</a>
+            - <a href="{% url 'shuffle_joueurs' %}">Mélanger les joueurs</a>
+        </span>
     </body>
 </html>

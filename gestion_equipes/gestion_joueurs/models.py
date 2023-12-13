@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Equipe(models.Model):
     nom_equipe = models.CharField(max_length=100)
 
