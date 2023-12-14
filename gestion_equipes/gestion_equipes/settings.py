@@ -29,16 +29,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-LOGIN_URL = '/connexion_admin/'
-LOGOUT_URL = '/deconnexion/'
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-]
-
-SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
-SESSION_SAVE_EVERY_REQUEST = True
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
