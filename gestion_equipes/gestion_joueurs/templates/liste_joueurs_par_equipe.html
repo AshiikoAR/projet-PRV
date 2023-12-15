@@ -55,19 +55,16 @@
                 {% for equipe in equipes %}
                     <tr>
                         <td>
-                            <b><u>{{ equipe.nom_equipe }}</u></b>
-                            <br>
+                            <b><u>{{ equipe.nom_equipe }}</u></b><br>
                             <span>
                             <a href="{% url 'supprimer_equipe' equipe.id %}">Supprimer</a>
                         </td>
                         <td>
                             {% if equipe.joueur_set.all %}
                                 {% for joueur in equipe.joueur_set.all %}
-                                    <br>
-                                    {{ joueur.nom_joueur }}
+                                    <br>{{ joueur.nom_joueur }}
                                     <span>
-                                        <br>
-                                        <a href="{% url 'modifier_joueur_equipe' joueur.id %}">Modifier</a>
+                                        <br><a href="{% url 'modifier_joueur_equipe' joueur.id %}">Modifier</a>
                                         - <a href="{% url 'supprimer_joueur' joueur.id %}">Supprimer</a>
                                     </span>
                                     <br><br>

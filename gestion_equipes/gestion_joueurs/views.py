@@ -8,7 +8,7 @@ from .models import Joueur, Equipe, Transfert
 from .forms import EquipeForm, JoueurForm
 
 def liste_joueurs_par_equipe(request):
-    equipes = Equipe.objects.all()
+    equipes = Equipe.objects.all() # Permet de récupérer tout les éléments de la table Equipe
     return render(request, 'liste_joueurs_par_equipe.html', {'equipes': equipes})
 
 def ajout_equipe(request):
@@ -33,15 +33,12 @@ def ajout_joueur(request):
 
 def modifier_joueur_equipe(request, joueur_id):
     joueur = Joueur.objects.get(pk=joueur_id)
-    
     if request.method == 'POST':
         equipe_id = request.POST['equipe']
         equipe = Equipe.objects.get(pk=equipe_id)
         joueur.equipe = equipe
-        joueur.save()
-        
+        joueur.save()   
         return redirect('liste_joueurs_par_equipe')  # Redirection vers la liste des joueurs par équipe
-    
     return render(request, 'modifier_joueur_equipe.html', {'joueur': joueur, 'equipes': Equipe.objects.all()})
 
 def supprimer_joueur(request, joueur_id):
@@ -64,16 +61,10 @@ def supprimer_equipe(request, equipe_id):
 def shuffle_joueurs(request):
     equipes = list(Equipe.objects.all())
     joueurs = list(Joueur.objects.all())
-
     random.shuffle(joueurs)
-
-    # Supprime toutes les associations existantes entre les joueurs et les équipes
-    Transfert.objects.all().delete()
-
-    # Associe chaque joueur à une équipe de manière aléatoire
-    for i, joueur in enumerate(joueurs):
+    Transfert.objects.all().delete() # Supprime toutes les associations existantes entre les joueurs et les équipes
+    for i, joueur in enumerate(joueurs): # Associe chaque joueur à une équipe de manière aléatoire
         equipe = equipes[i % len(equipes)]
         Transfert.objects.create(joueur=joueur, equipe=equipe)
-
     return redirect('liste_joueurs_par_equipe')
 
